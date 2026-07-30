@@ -78,12 +78,17 @@ function generateRandomPassword() {
   return `Pass!${Math.random().toString(36).slice(-8)}`;
 }
 
-// Telecom generator for Auto Account Mode (OPay friendly prefixes)
+// Telecom generator for Auto Account Mode (Mix of 5-digit and 6-digit prefixes)
 function generateAccountNumber() {
   const prefixes = [
-    '8067', '8034', '9043', '8167', '70735', 
-    '9067', '8178', '9053', '70678', '90397', 
-    '903469', '90373', '902750', '81495', '81424', '808188'
+    // 5-digit prefixes
+    '80617', '80620', '80636', '80685', '80707', '80742', '80763', '80802',
+    '80811', '80841', '80868', '81003', '81027', '81142', '81208', '90105',
+    '90225', '90304', '90404', '90415',
+    // 6-digit prefixes
+    '806193', '806321', '806439', '806862', '807317', '807451', '807673', '808090',
+    '808188', '808550', '808904', '810071', '810530', '811848', '812119', '901178',
+    '902298', '903110', '904066', '904137'
   ];
   const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
 
@@ -292,7 +297,7 @@ async function runHybridEngine(config) {
   } 
   // PATH B: AUTO-GEN URLS (Self-Feeding Seed & Fodder Farm)
   else if (urlMode === 'autogen') {
-    const urlPrefix = 'zenxico';
+    const urlPrefix = 'rexifyuserzicone';
     const urlDomain = '@gmail.com';
 
     for (let cycle = 1; cycle <= urlCount; cycle++) {
@@ -439,7 +444,7 @@ async function processAccount(accountData, rowIndex, workerId, targetUrl, custom
       }
     }
 
-    if (!isVerified) throw new Error(`Failed account verification after ${MAX_VERIFY_ATTEMPTS} attempt(s).`);
+    if (!isVerified) throw new Error(`Failed account verification after ${MAX_VERIFY_ATTEMPTS} attempts.`);
 
     const finishBtn = await page.waitForSelector('text/Finish & continue', { visible: true, timeout: 15000 });
     await randomDelay(800, 1500);
